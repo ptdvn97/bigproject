@@ -171,10 +171,12 @@ void modify()
 {
     struct Manage sv;
     int n,record=0,c,dem=0;
-    printf("Enter the ID of record: ");
-    scanf("%d",&n);
     FILE *fp=fopen("student.dat","rb+");
-    rewind(fp);
+    Alibaba:
+        {
+            printf("Enter the ID of record: ");
+            scanf("%d",&n);
+
     while(fread(&sv,sizeof(struct Manage),1,fp))
     {
         if(sv.mssv==n)
@@ -183,11 +185,13 @@ void modify()
             break;
         }
         record++;
-
+    }
     }
     if(dem==1)
     {
-        printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
+    Aloha:
+        {
+    printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
     printf("\n\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n\n",sv.mssv,sv.name,sv.mat,sv.phy,sv.chem,sv.lit,sv.bio);
     printf("What will be changed ?\n");
     printf("1. ID\n");
@@ -240,10 +244,33 @@ void modify()
     printf("\n\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n\n",sv.mssv,sv.name,sv.mat,sv.phy,sv.chem,sv.lit,sv.bio);
     fseek(fp,sizeof(struct Manage)*record,SEEK_SET);
     fwrite(&sv,sizeof(struct Manage),1,fp);
+    printf("Do you want to change something else(1 for yes, 2 for no) ?: ");
+    scanf("%d",&c);
+    if(c==1)
+    {
+        system("cls");
+        goto Aloha;
+    }
+    }
     }
     else
     {
         printf("ID not found.");
+        printf("Press 1 to enter again, 2 to return the menu: ");
+        scanf("%d",&c);
+        if(c==1)
+        {
+            system("cls");
+            rewind(fp);
+            goto Alibaba;
+        }
+        else if(c==2)
+        {
+            system("cls");
+            main();
+        }
     }
     fclose(fp);
+    system("cls");
+    main();
 }
