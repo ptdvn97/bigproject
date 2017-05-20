@@ -3,7 +3,7 @@
 
 void addID();
 void showData();
-int searchID()
-int function4();
+void searchID()
+void exportTextFile();
 
 #endif // LIB_H_INCLUDED

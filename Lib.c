@@ -111,24 +111,8 @@ void showData()
     return 0;
 }
 
-int function4()
-{
-    struct Manage mag;
-    FILE *f1=fopen("student.dat","r" );
-    FILE *f2=fopen("student.txt","w");
-    fprintf(f2,"\t%-16s%-45s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
-    while(!feof(f1))
-    {
-        fread(&mag,sizeof(struct Manage),1,f1);
-        if(!feof(f1))
-            fprintf(f2,"\t%-16d%-45s%-16d%-16d%-16d%-16d%-16d\n",mag.mssv,mag.name,mag.mat,mag.phy,mag.chem,mag.lit,mag.bio);
-    }
-    fclose(f2);
-    fclose(f1);
-    return 0;
-}
 
-int searchID()
+void searchID()
 {
     struct Manage sv;
     int n,dem=0;
@@ -163,3 +147,22 @@ int searchID()
         break;
     }
 }
+
+
+void exportTextFile()
+{
+    struct Manage mag;
+    FILE *f1=fopen("student.dat","r" );
+    FILE *f2=fopen("student.txt","w");
+    fprintf(f2,"\t%-16s%-45s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
+    while(!feof(f1))
+    {
+        fread(&mag,sizeof(struct Manage),1,f1);
+        if(!feof(f1))
+            fprintf(f2,"\t%-16d%-45s%-16d%-16d%-16d%-16d%-16d\n",mag.mssv,mag.name,mag.mat,mag.phy,mag.chem,mag.lit,mag.bio);
+    }
+    fclose(f2);
+    fclose(f1);
+    return 0;
+}
+

@@ -5,13 +5,13 @@ int main()
 {
     int n;
     printf("\t1. Create new account\n");
-    printf("\t2. Read data alrealy stored\n");
+    printf("\t2. Show data stored\n");
     printf("\t3. Searching for an account\n");
-    printf("\t4. ...\n");
+    printf("\t4. Export the data\n");
     printf("\t5. Exit\n\n");
     CT:
         {
-    printf("\tEnter your choice :");
+    printf("\tEnter your choice : ");
     scanf("%d",&n);
     switch(n)
     {
@@ -25,7 +25,7 @@ int main()
         searchID();
         break;
     case 4:
-        function4();
+        exportTextFile();
         break;
     case 5:
         break;

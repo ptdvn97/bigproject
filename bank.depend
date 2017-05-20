@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1495275633 source:c:\users\dung phan\documents\bank\lib.c
+	<stdio.h>
+	<math.h>
+	<string.h>
+	<stdlib.h>
+
+1495275553 source:c:\users\dung phan\documents\bank\main.c
+	<stdio.h>
+	<stdlib.h>
+
