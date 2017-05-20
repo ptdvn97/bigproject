@@ -29,7 +29,7 @@ void addID() /////////// Hàm thêm ID học sinh
         {
         printf("\nID of student %d : ",i+1); // Nhập ID hs thứ i+1
         scanf("%d",&sv.mssv);
-        while(fread(&check,sizeof(struct Manage),1,fptr)) // vòng lặp kiểm tra xem ID đã có hay chưa
+        while(fread(&check,sizeof(struct Manage),1,fptr)) // vòng lặp kiểm tra xem ID đã có hay chưa, gán thông tin trong file vào biến check.
             {
             if(sv.mssv==check.mssv)  // sv.mssv là ID nhập từ phím, check.mssv là ID đọc trong file.
                 {
