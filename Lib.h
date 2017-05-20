@@ -5,5 +5,5 @@ void addID();
 void showData();
 void searchID()
 void exportTextFile();
-
+void modify();
 #endif // LIB_H_INCLUDED

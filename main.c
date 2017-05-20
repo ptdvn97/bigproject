@@ -8,7 +8,8 @@ int main()
     printf("\t2. Show data stored\n");
     printf("\t3. Searching for an account\n");
     printf("\t4. Export the data\n");
-    printf("\t5. Exit\n\n");
+    printf("\t5. Modify the information\n");
+    printf("\t6. Exit\n\n");
     CT:
         {
     printf("\tEnter your choice : ");
@@ -27,7 +28,11 @@ int main()
     case 4:
         exportTextFile();
         break;
+    case 6:
+        exit(0);
+        break;
     case 5:
+        modify();
         break;
     default:
         printf("\tWrong selection\n");
