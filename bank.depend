@@ -9,13 +9,15 @@
 	<stdio.h>
 	<stdlib.h>
 
-1495277728 source:c:\users\dung phan\documents\bigproject\main.c
+1495380022 source:c:\users\dung phan\documents\bigproject\main.c
 	<stdio.h>
 	<stdlib.h>
+	<conio.h>
 
-1495289324 source:c:\users\dung phan\documents\bigproject\lib.c
+1495380004 source:c:\users\dung phan\documents\bigproject\lib.c
 	<stdio.h>
 	<math.h>
 	<string.h>
 	<stdlib.h>
+	<conio.h>
 

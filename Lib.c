@@ -2,7 +2,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <conio.h>
 struct Manage
 {
     int mssv;
@@ -94,6 +94,7 @@ void showData()
        printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
        while(fread(&infor,sizeof(struct Manage),1,fptr))
        {
+           if(infor.mssv!=0)
            printf("\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n",infor.mssv,infor.name,infor.mat,infor.phy,infor.chem,infor.lit,infor.bio);
        }
     }
@@ -169,6 +170,7 @@ void exportTextFile()
 
 void modify()
 {
+    struct Manage dlt={0,"",0,0,0,0,0};
     struct Manage sv;
     int n,record=0,c,dem=0;
     FILE *fp=fopen("student.dat","rb+");
@@ -201,7 +203,8 @@ void modify()
     printf("5. Chemistry score\n");
     printf("6. Literature score\n");
     printf("7. Biology score\n");
-    printf("8. Return the menu\n");
+    printf("8. Delete this record\n");
+    printf("9. Return the menu\n");
     printf("\nEnter your selection: ");
     scanf("%d",&c);
     switch(c)
@@ -209,42 +212,62 @@ void modify()
     case 1:
         printf("New ID : ");
         scanf("%d",&sv.mssv);
+        printf("ID has been changed !\n");
         break;
     case 2:
         fflush(stdin);
         printf("New Name : ");
         gets(sv.name);
+        printf("Name has been changed !\n");
         break;
     case 3:
         printf("New Math score : ");
         scanf("%d",&sv.mat);
+        printf("Score has been changed !\n");
         break;
     case 4:
         printf("New Physic score : ");
         scanf("%d",&sv.phy);
+        printf("Score has been changed !\n");
         break;
     case 5:
         printf("New Chemistry score : ");
         scanf("%d",&sv.chem);
+        printf("Score has been changed !\n");
         break;
     case 6:
         printf("New Literature score : ");
         scanf("%d",&sv.lit);
+        printf("Score has been changed !\n");
         break;
     case 7:
         printf("New Biology score : ");
         scanf("%d",&sv.bio);
+        printf("Score has been changed !\n");
         break;
     case 8:
+        printf("Are you sure ?(1:YES 2:NO): ");
+        scanf("%d",&c);
+        if(c==1)
+        {
+            sv=dlt;
+            printf("The record is deleted !\n");
+            getch();
+            break;
+        }
+        else
+        {
+            system("cls");
+            goto Aloha;
+        }
+    case 9:
         system("cls");
         main();
         break;
     }
-    printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
-    printf("\n\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n\n",sv.mssv,sv.name,sv.mat,sv.phy,sv.chem,sv.lit,sv.bio);
     fseek(fp,sizeof(struct Manage)*record,SEEK_SET);
     fwrite(&sv,sizeof(struct Manage),1,fp);
-    printf("Do you want to change something else(1 for yes, 2 for no) ?: ");
+    printf("\nDo you want to change something else(1:YES, 2:NO) ?: ");
     scanf("%d",&c);
     if(c==1)
     {
