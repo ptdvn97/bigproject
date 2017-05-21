@@ -99,16 +99,23 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
            printf("\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n",infor.mssv,infor.name,infor.mat,infor.phy,infor.chem,infor.lit,infor.bio);
        }
     }
-    printf("enter 1 to return the menu: ");
+    printf("1: Return menu, 2: Backup database: ");
     scanf("%d",&n);
     if(n==1)
     {
         system("cls");
         main();
     }
-    else
+    else if(n==2)
         {
-            exit(0);
+            system("cls");
+            exportTextFile();
+            printf("backup.txt created !\n");
+            printf("backup.dat created !\n");
+            printf("Enter to return menu. ");
+            getch();
+            system("cls");
+            main();
         }
 
     return 0;
@@ -142,6 +149,7 @@ void searchID()// Hàm search ID học sinh/////////////////////////////////////
     switch(n)
     {
     case 1:
+        system("cls");
         searchID();
         break;
     case 2:
@@ -156,16 +164,20 @@ void exportTextFile()////Hàm export CSDL ra file text//////////////////////////
 {
     struct Manage mag;
     FILE *f1=fopen("student.dat","r" );
-    FILE *f2=fopen("student.txt","w");
+    FILE *f2=fopen("backup.txt","w");
+    FILE *f3=fopen("backup.dat","w");
     fprintf(f2,"\t%-16s%-45s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
-    while(!feof(f1))
+    while(fread(&mag,sizeof(struct Manage),1,f1))
     {
-        fread(&mag,sizeof(struct Manage),1,f1);
-        if(!feof(f1))
-            fprintf(f2,"\t%-16d%-45s%-16d%-16d%-16d%-16d%-16d\n",mag.mssv,mag.name,mag.mat,mag.phy,mag.chem,mag.lit,mag.bio);
+            if(mag.mssv!=0)
+            {
+                fprintf(f2,"\t%-16d%-45s%-16d%-16d%-16d%-16d%-16d\n",mag.mssv,mag.name,mag.mat,mag.phy,mag.chem,mag.lit,mag.bio);
+                fwrite(&mag,sizeof(struct Manage),1,f3);
+            }
     }
     fclose(f2);
     fclose(f1);
+    fclose(f3);
     return 0;
 }
 
@@ -279,7 +291,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
     }
     else
     {
-        printf("ID not found.");
+        printf("ID not found.\n");
         printf("Press 1 to enter again, 2 to return the menu: ");
         scanf("%d",&c);
         if(c==1)

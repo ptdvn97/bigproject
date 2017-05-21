@@ -1,0 +1,3 @@
+	ID              Name                                         Math            Physic          Chemistry       Literature      Biology         
+	1552080         Nguyen Anh Dung                              10              6               9               5               10              
+	1552083         Phan Tien Dung                               9               6               7               4               7               
