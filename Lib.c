@@ -2,13 +2,9 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-<<<<<<< HEAD
 #include <conio.h>
-struct Manage
-=======
 
 struct Manage // Khai báo kiểu hàm struct Manage 7 biến
->>>>>>> 7742d9dea36e1b0181197cf1cff7b9095cc37667
 {
     int mssv;
     char name[255];
@@ -59,13 +55,13 @@ void addID() /////////// Hàm thêm ID học sinh///////////////////////////////
                 scanf("%d",&sv.bio);
                 fwrite(&sv,sizeof(struct Manage),1,fptr);
                 dem=0; // gán biến đếm về 0 sau mỗi vòng kiểm tra.
-                rewind(fptr); // trả con trỏ về đầu file 
+                rewind(fptr); // trả con trỏ về đầu file
         }
         else // nếu đếm = 1, tức là bị trùng thì chạy bọn dưới.
         {
             system("cls"); // lệnh xóa màn hình cho đẹp.
             dem=0; // gán biến đếm về 0 sau mỗi vòng kiểm tra.
-            rewind(fptr); // trả con trỏ về đầu file 
+            rewind(fptr); // trả con trỏ về đầu file
             printf("This ID already exists.\n");
             printf("Press 1 to skip, 2 to import again, 3 to return the menu: "); // tạo menu lựa chọn. 1 là bỏ qua thằng trước, nhập thằng kế tiếp, 2 là nhập lại từ đầu, 3 là trở về menu
             scanf("%d",&c);
