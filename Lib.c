@@ -75,7 +75,7 @@ void addID() /////////// Hàm thêm ID học sinh///////////////////////////////
         }
     }
     system("cls");
-    main();
+    mainlect();
     fclose(fptr);
     printf("\n");
 }
@@ -92,7 +92,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
         fclose(fptr);
         getch();
         system("cls");
-        main();
+        mainlect();
     }
     else
     {
@@ -109,7 +109,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
     if(n==1)
     {
         system("cls");
-        main();
+        mainlect();
     }
     else if(n==2)
         {
@@ -120,7 +120,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
             printf("Enter to return menu. ");
             getch();
             system("cls");
-            main();
+            mainlect();
         }
     }
 }
@@ -158,7 +158,7 @@ void searchID()// Hàm search ID học sinh/////////////////////////////////////
         break;
     case 2:
         system("cls");
-        main();
+        mainlect();
         break;
     }
 }
@@ -289,7 +289,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
     case 9:
         fclose(fp);
         system("cls");
-        main();
+        mainlect();
         break;
     }
     fseek(fp,sizeof(struct Manage)*record,SEEK_SET);
@@ -318,10 +318,10 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
         else if(c==2)
         {
             system("cls");
-            main();
+            mainlect();
         }
     }
     fclose(fp);
     system("cls");
-    main();
+    mainlect();
 }
