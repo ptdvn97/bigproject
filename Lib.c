@@ -166,7 +166,7 @@ void searchID()// Hàm search ID học sinh/////////////////////////////////////
 void exportTextFile()////Hàm export CSDL ra file text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     struct Manage mag;
-    FILE *f1=fopen("student.dat","r" );
+    FILE *f1=fopen("student.dat","rb" );
     FILE *f2=fopen("backup.txt","w");
     FILE *f3=fopen("backup.dat","w");
     fprintf(f2,"\t%-16s%-45s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");

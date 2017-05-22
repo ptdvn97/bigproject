@@ -1,3 +1,5 @@
 	ID              Name                                         Math            Physic          Chemistry       Literature      Biology         
-	1               Dung                                         1               2               3               4               5               
-	2               Hao                                          1               2               3               4               5               
+	1552089         Anh Hao                                      10              2               3               4               5               
+	1552084         Phan Tien Dung                               9               8               7               8               5               
+	1552085         Bao Dat                                      1               2               3               4               5               
+	1552086         Dung Rom                                     6               7               4               8               6               
