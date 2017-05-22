@@ -23,7 +23,7 @@ void addID() /////////// Hàm thêm ID học sinh///////////////////////////////
     struct Manage sv; ////////tạo biến sv mang kiểu hàm Manage.
     struct Manage check; /// tương tự
     FILE *fptr;
-    fptr=fopen("student.dat","a+"); ////// mở file student.dat mode a+.
+    fptr=fopen("student.dat","ab+"); ////// mở file student.dat mode a+.
     for(i=0;i<m;i++) // chạy vòng lặp theo số lượng học sinh, từ 0 tới m.
     {
         CT:
@@ -84,11 +84,14 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
     int n;
     struct Manage infor;
     FILE *fptr;
-    fptr=fopen("student.dat","r");
+    fptr=fopen("student.dat","rb");
     if(fptr==NULL)
     {
-        printf("Can not read the file, enter to return menu.");
+        printf("Can not read the file.\n");
+        printf("Enter to return menu");
+        fclose(fptr);
         getch();
+        system("cls");
         main();
     }
     else
@@ -100,7 +103,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
            if(infor.mssv!=0)
            printf("\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n",infor.mssv,infor.name,infor.mat,infor.phy,infor.chem,infor.lit,infor.bio);
        }
-    }
+       fclose(fptr);
     printf("1: Return menu, 2: Backup database: ");
     scanf("%d",&n);
     if(n==1)
@@ -119,8 +122,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
             system("cls");
             main();
         }
-
-    return 0;
+    }
 }
 
 
@@ -129,7 +131,7 @@ void searchID()// Hàm search ID học sinh/////////////////////////////////////
     struct Manage sv;
     int n,dem=0;
     char m;
-    FILE *fptr=fopen("student.dat","r");
+    FILE *fptr=fopen("student.dat","rb");
     printf("Enter the ID for searching: ");
     scanf("%d",&n);
     while(fread(&sv,sizeof(struct Manage),1,fptr))
@@ -160,7 +162,6 @@ void searchID()// Hàm search ID học sinh/////////////////////////////////////
         break;
     }
 }
-
 
 void exportTextFile()////Hàm export CSDL ra file text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
@@ -208,7 +209,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
     if(dem==1)
     {
     Aloha:
-        {
+        {}
     printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
     printf("\n\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n\n",sv.mssv,sv.name,sv.mat,sv.phy,sv.chem,sv.lit,sv.bio);
     printf("What will be changed ?\n");
@@ -277,8 +278,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
         if(c==1)
         {
             sv=dlt;
-            printf("The record is deleted !\n");
-            getch();
+            printf("The record is deleted !");
             break;
         }
         else
@@ -287,20 +287,21 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
             goto Aloha;
         }
     case 9:
-        system("cls");
         fclose(fp);
+        system("cls");
         main();
         break;
     }
     fseek(fp,sizeof(struct Manage)*record,SEEK_SET);
     fwrite(&sv,sizeof(struct Manage),1,fp);
+    fclose(fp);
     printf("\nDo you want to change something else(1:YES, 2:NO) ?: ");
     scanf("%d",&c);
     if(c==1)
     {
         system("cls");
+        FILE *fp=fopen("student.dat","rb+");
         goto Aloha;
-    }
     }
     }
     else

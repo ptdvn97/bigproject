@@ -1,3 +1,3 @@
 	ID              Name                                         Math            Physic          Chemistry       Literature      Biology         
-	1552081         Dung Nguyen                                  10              6               9               5               10              
-	1552083         Phan Tien Dung                               10              10              7               4               10              
+	1               Dung                                         1               2               3               4               5               
+	2               Hao                                          1               2               3               4               5               
