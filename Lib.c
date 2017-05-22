@@ -235,6 +235,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
             {
                 printf("ID already exists !: ");
                 scanf("%d",&sv.mssv);
+                rewind(fp);
             }
         }
         printf("ID has been changed !\n");
@@ -287,6 +288,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
         }
     case 9:
         system("cls");
+        fclose(fp);
         main();
         break;
     }
