@@ -41,17 +41,17 @@ void addID() /////////// Hàm thêm ID học sinh///////////////////////////////
         if(dem==0) // nếu biến đếm = 0 tức là không trùng thì chạy bọn dưới.
         {
                 fflush(stdin);
-                printf("Name of student %d :",i+1);
+                printf("Name of student:");
                 gets(sv.name);
-                printf("Math score %d: ",i+1);
+                printf("Math score: ");
                 scanf("%d",&sv.mat);
-                printf("Physic score %d: ",i+1);
+                printf("Physic score: ");
                 scanf("%d",&sv.phy);
-                printf("Chemistry score %d: ",i+1);
+                printf("Chemistry score: ");
                 scanf("%d",&sv.chem);
-                printf("Literature score %d: ",i+1);
+                printf("Literature score: ");
                 scanf("%d",&sv.lit);
-                printf("Biology score %d: ",i+1);
+                printf("Biology score: ");
                 scanf("%d",&sv.bio);
                 fwrite(&sv,sizeof(struct Manage),1,fptr);
                 dem=0; // gán biến đếm về 0 sau mỗi vòng kiểm tra.
