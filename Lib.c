@@ -87,7 +87,9 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
     fptr=fopen("student.dat","r");
     if(fptr==NULL)
     {
-        printf("Can not read the file");
+        printf("Can not read the file, enter to return menu.");
+        getch();
+        main();
     }
     else
     {
