@@ -185,6 +185,7 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
 {
     struct Manage dlt={0,"",0,0,0,0,0};
     struct Manage sv;
+    struct Manage check;
     int n,record=0,c,dem=0;
     FILE *fp=fopen("student.dat","rb+");
     Alibaba:
@@ -225,6 +226,15 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
     case 1:
         printf("New ID : ");
         scanf("%d",&sv.mssv);
+        rewind(fp);
+        while(fread(&check,sizeof(struct Manage),1,fp))
+        {
+            if(sv.mssv==check.mssv)
+            {
+                printf("ID already exists !: ");
+                scanf("%d",&sv.mssv);
+            }
+        }
         printf("ID has been changed !\n");
         break;
     case 2:
