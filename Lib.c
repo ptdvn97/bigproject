@@ -453,10 +453,15 @@ void listscholar()
 }
 void best()
 {
+    int n,gpa,mat=0,lit=0,chem=0,phy=0,bio=0;
     struct Manage list;
-    struct Manage stu;
-    int n,math=0,lit=0,phy=0,chem=0,bio=0,GPA,best=0,a,b,c,d,e,f;
-    FILE *fptr = fopen("student.dat","rb");
+    struct Manage bmat;
+    struct Manage bphy;
+    struct Manage bchem;
+    struct Manage bbio;
+    struct Manage blit;
+    FILE *fptr;
+    fptr=fopen("student.dat","rb");
     if(fptr==NULL)
     {
         printf("Can not read the file.\n");
@@ -464,83 +469,80 @@ void best()
         fclose(fptr);
         getch();
         system("cls");
-        mainlect();
+        mainstu();
     }
     else
     {
-        while(fread(&list,sizeof(struct Manage),1,fptr))
+       while(fread(&list,sizeof(struct Manage),1,fptr))
+       {
+           if (list.bio>=bio) bio = list.bio;
+           if (list.chem>=chem) chem = list.chem;
+           if (list.lit>=lit) lit = list.lit;
+           if (list.mat>=mat) mat = list.mat;
+           if (list.phy>=phy) phy = list.phy;
+       }
+       rewind(fptr);
+       printf("\n\n\tBEST OF MATHS");
+       while(fread(&bmat,sizeof(struct Manage),1,fptr))
+      {
+          if (bmat.mat>=mat)
+            {
+                printf("\n%-10s%-15s%s","ID","NAME","SCORE");
+            printf("\n%-10d%-15s%d",bmat.mssv,bmat.name,mat);
+            }
+       }
+       rewind(fptr);
+       printf("\n\n\tBEST OF PHYSICS");
+       while(fread(&bphy,sizeof(struct Manage),1,fptr))
+      {
+          if (bphy.phy>=phy)
+            {
+                printf("\n%-10s%-15s%s","ID","NAME","SCORE");
+            printf("\n%-10d%-15s%d",bphy.mssv,bphy.name,phy);
+            }
+      }
+      rewind(fptr);
+       printf("\n\n\tBEST OF CHEMISTRY");
+       while(fread(&bchem,sizeof(struct Manage),1,fptr))
+      {
+          if (bchem.chem>=chem)
+            {
+                printf("\n%-10s%-15s%s","ID","NAME","SCORE");
+            printf("\n%-10d%-15s%d",bphy.mssv,bphy.name,chem);
+            }
+      }
+      rewind(fptr);
+       printf("\n\n\tBEST OF BIOLOGY");
+       while(fread(&bbio,sizeof(struct Manage),1,fptr))
+      {
+          if (bbio.bio>=bio)
+            {
+                printf("\n%-10s%-15s%s","ID","NAME","SCORE");
+            printf("\n%-10d%-15s%d",bphy.mssv,bphy.name,bio);
+            }
+      }
+      rewind(fptr);
+       printf("\n\n\tBEST OF LITERATURE");
+       while(fread(&blit,sizeof(struct Manage),1,fptr))
+      {
+          if (blit.lit>=lit)
+            {
+                printf("\n%-10s%-15s%s","ID","NAME","SCORE");
+          printf("\n%-10d%-15s%d",bphy.mssv,bphy.name,lit);
+            }
+      }
+       fclose(fptr);
+       printf("\n\n1: Return menu, 2: Exit: ");
+       scanf("%d",&n);
+       if(n==1)
         {
-            GPA = (list.mat+list.phy+list.chem+list.lit+list.bio)/5;
-            if (GPA>=best)
-            {
-                best = GPA;
-            }
-            if (list.mat>=math)
-            {
-                math = list.mat;
-            }
-            if (list.phy>=phy)
-            {
-                phy = list.phy;
-            }
-            if (list.chem>=chem)
-            {
-                chem = list.chem;
-            }
-            if (list.lit>=lit)
-            {
-                lit = list.lit;
-            }
-            if (list.bio>=bio)
-            {
-                bio = list.bio;
-            }
+        system("cls");
+        mainstu();
+        }
+        else if(n==2)
+        {
+            system("cls");
+            main();
         }
     }
-    printf("\nList of best student : \n");
-    while(fread(&stu,sizeof(struct Manage),1,fptr))
-    {
-        GPA = (stu.mat+stu.phy+stu.chem+stu.lit+stu.bio)/5;
-        printf("\nStudent with highest GPA: \n");
-        printf("\t%-16s%-30s%-16s\n","ID","Name","GPA");
-        if (GPA==best)
-        {
-            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,GPA);
-        }
-        printf("\nStudent with highest Math: \n");
-        printf("\t%-16s%-30s%-16s\n","ID","Name","Math");
-        if (stu.mat==math)
-        {
-            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.mat);
-        }
-        printf("\nStudent with highest Physics: \n");
-        printf("\t%-16s%-30s%-16s\n","ID","Name","Physics");
-        if (stu.phy==phy)
-        {
-            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.phy);
-        }
-        printf("\nStudent with highest Chemistry: \n");
-        printf("\t%-16s%-30s%-16s\n","ID","Name","Chemistry");
-        if (stu.chem==chem)
-        {
-            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.chem);
-        }
-        printf("\nStudent with highest Literature: \n");
-        printf("\t%-16s%-30s%-16s\n","ID","Name","Literature");
-        if (stu.lit==lit)
-        {
-            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.lit);
-        }
-        printf("\nStudent with highest Biology: \n");
-        printf("\t%-16s%-30s%-16s\n","ID","Name","Biology");
-        if (stu.bio==bio)
-        {
-            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.bio);
-        }
-    }
-    printf("enter to return menu");
-    getch();
-    fclose(fptr);
-    system("cls");
-    mainstu();
 }

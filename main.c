@@ -344,10 +344,10 @@ void mainstu()
 {
         int n;
     printf("Welcome to Student Management System for Student. Please follow the instructions below !\n\n\n");
-    printf("\t1. scholar\n");
-    printf("\t2. listscholar\n");
-    printf("\t3. best\n");
-    printf("\t4. search\n");
+    printf("\t1. Scholar\n");
+    printf("\t2. Listscholar\n");
+    printf("\t3. Best\n");
+    printf("\t4. Search\n");
     printf("\t5. Exit\n\n");
     CT:
         {
