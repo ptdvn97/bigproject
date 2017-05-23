@@ -126,7 +126,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
 }
 
 
-void searchID()// Hàm search ID học sinh//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void searchID1()// Hàm search ID học sinh//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     struct Manage sv;
     int n,dem=0;
@@ -154,11 +154,48 @@ void searchID()// Hàm search ID học sinh/////////////////////////////////////
     {
     case 1:
         system("cls");
-        searchID();
+        searchID1();
         break;
     case 2:
         system("cls");
         mainlect();
+        break;
+    }
+}
+
+void searchID2()// Hàm search ID học sinh//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+    struct Manage sv;
+    int n,dem=0;
+    char m;
+    FILE *fptr=fopen("student.dat","rb");
+    printf("Enter the ID for searching: ");
+    scanf("%d",&n);
+    while(fread(&sv,sizeof(struct Manage),1,fptr))
+    {
+        if(sv.mssv==n)
+        {
+            printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
+            printf("\n\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n",sv.mssv,sv.name,sv.mat,sv.phy,sv.chem,sv.lit,sv.bio);
+            dem++;
+        }
+    }
+    if(dem==0)
+    {
+        printf("\n\tID Not found\n");
+    }
+    fclose(fptr);
+    printf("Enter 1 to search again, 2 to return the menu: ");
+    scanf("%d",&n);
+    switch(n)
+    {
+    case 1:
+        system("cls");
+        searchID2();
+        break;
+    case 2:
+        system("cls");
+        mainstu();
         break;
     }
 }
@@ -279,6 +316,12 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
         {
             sv=dlt;
             printf("The record is deleted !");
+            fseek(fp,sizeof(struct Manage)*record,SEEK_SET);
+            fwrite(&sv,sizeof(struct Manage),1,fp);
+            fclose(fp);
+            getch();
+            system("cls");
+            mainlect();
             break;
         }
         else
@@ -324,4 +367,180 @@ void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////
     fclose(fp);
     system("cls");
     mainlect();
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void scholar()
+{
+    struct Manage sv;
+    int n, GPA, dem=0;
+    FILE *fptr = fopen("student.dat","rb");
+    printf("Enter your ID: ");
+    scanf("%d",&n);
+    while(fread(&sv,sizeof(struct Manage),1,fptr))
+    {
+        if(sv.mssv == n)
+        {
+           printf("\t%-16s%-30s%-16s%-16s%-16s%-16s%-16s\n","ID","Name","Math","Physic","Chemistry","Literature","Biology");
+           printf("\n\t%-16d%-30s%-16d%-16d%-16d%-16d%-16d\n",sv.mssv,sv.name,sv.mat,sv.phy,sv.chem,sv.lit,sv.bio);
+           printf("GPA : %d\n",(sv.mat+sv.phy+sv.chem+sv.lit+sv.bio)/5);
+           GPA = (sv.mat+sv.phy+sv.chem+sv.lit+sv.bio)/5;
+           if ((GPA>=8)&&(sv.mat>=5)&&(sv.phy>=5)&&(sv.chem>=5)&&(sv.lit>=5)&&(sv.bio>=5))
+            printf("\n YOU'VE GOT A SCHOLAR \n");
+           else
+           {
+               printf("\n Course needed to retake: ");
+               if (sv.mat<5) printf(" Maths ");
+               if (sv.phy<5) printf(" Physics ");
+               if (sv.chem<5) printf(" Chemistry ");
+               if (sv.lit<5) printf(" Literature ");
+               if (sv.bio<5) printf(" Biology ");
+           }
+           dem++;
+        }
+    }
+    if(dem==0)
+    {
+        printf("\n\tID Not found\n");
+    }
+    fclose(fptr);
+    printf("\nEnter 1 to search again, 2 to return the menu: ");
+    scanf("%d",&n);
+    switch(n)
+    {
+    case 1:
+        system("cls");
+        scholar();
+        break;
+    case 2:
+        system("cls");
+        mainstu();
+        break;
+    }
+}
+
+void listscholar()
+{
+    struct Manage list;
+    int n;
+    double GPA;
+    FILE *fptr = fopen("student.dat","rb");
+    if(fptr==NULL)
+    {
+        printf("Can not read the file.\n");
+        printf("Enter to return menu");
+        fclose(fptr);
+        getch();
+        system("cls");
+        mainstu();
+    }
+    else
+    {
+        printf("\nList of student get scholar: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","GPA");
+        while(fread(&list,sizeof(struct Manage),1,fptr))
+        {
+            GPA = (list.mat+list.phy+list.chem+list.lit+list.bio)/5;
+            if (GPA>=8)
+                printf("\t%-16d%-30s%-16.2f\n",list.mssv,list.name,GPA);
+        }
+    }
+    printf("enter to return menu");
+    getch();
+    fclose(fptr);
+    system("cls");
+    mainstu();
+}
+void best()
+{
+    struct Manage list;
+    struct Manage stu;
+    int n,math=0,lit=0,phy=0,chem=0,bio=0,GPA,best=0,a,b,c,d,e,f;
+    FILE *fptr = fopen("student.dat","rb");
+    if(fptr==NULL)
+    {
+        printf("Can not read the file.\n");
+        printf("Enter to return menu");
+        fclose(fptr);
+        getch();
+        system("cls");
+        mainlect();
+    }
+    else
+    {
+        while(fread(&list,sizeof(struct Manage),1,fptr))
+        {
+            GPA = (list.mat+list.phy+list.chem+list.lit+list.bio)/5;
+            if (GPA>=best)
+            {
+                best = GPA;
+            }
+            if (list.mat>=math)
+            {
+                math = list.mat;
+            }
+            if (list.phy>=phy)
+            {
+                phy = list.phy;
+            }
+            if (list.chem>=chem)
+            {
+                chem = list.chem;
+            }
+            if (list.lit>=lit)
+            {
+                lit = list.lit;
+            }
+            if (list.bio>=bio)
+            {
+                bio = list.bio;
+            }
+        }
+    }
+    printf("\nList of best student : \n");
+    while(fread(&stu,sizeof(struct Manage),1,fptr))
+    {
+        GPA = (stu.mat+stu.phy+stu.chem+stu.lit+stu.bio)/5;
+        printf("\nStudent with highest GPA: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","GPA");
+        if (GPA==best)
+        {
+            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,GPA);
+        }
+        printf("\nStudent with highest Math: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","Math");
+        if (stu.mat==math)
+        {
+            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.mat);
+        }
+        printf("\nStudent with highest Physics: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","Physics");
+        if (stu.phy==phy)
+        {
+            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.phy);
+        }
+        printf("\nStudent with highest Chemistry: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","Chemistry");
+        if (stu.chem==chem)
+        {
+            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.chem);
+        }
+        printf("\nStudent with highest Literature: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","Literature");
+        if (stu.lit==lit)
+        {
+            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.lit);
+        }
+        printf("\nStudent with highest Biology: \n");
+        printf("\t%-16s%-30s%-16s\n","ID","Name","Biology");
+        if (stu.bio==bio)
+        {
+            printf("\t%-16s%-30s%-16s\n",stu.mssv,stu.name,stu.bio);
+        }
+    }
+    printf("enter to return menu");
+    getch();
+    fclose(fptr);
+    system("cls");
+    mainstu();
 }
