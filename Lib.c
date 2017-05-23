@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <conio.h>
 
-struct Manage // Khai báo kiểu hàm struct Manage 7 biến
+struct Manage
 {
     int mssv;
     char name[255];
@@ -15,30 +15,30 @@ struct Manage // Khai báo kiểu hàm struct Manage 7 biến
     int bio;
 
 };
-void addID() /////////// Hàm thêm ID học sinh//////////////////////////////////////////////////////////////////////////////////////////////////////
+void addID()/////////////////////
 {
     int i,m,c,dem=0;
-    printf("Enter number of student : "); //////////// nhập số lượng HS
+    printf("Enter number of student : "); ////////////
     scanf("%d",&m);
-    struct Manage sv; ////////tạo biến sv mang kiểu hàm Manage.
+    struct Manage sv; ////////
     struct Manage check; /// tương tự
     FILE *fptr;
-    fptr=fopen("student.dat","ab+"); ////// mở file student.dat mode a+.
-    for(i=0;i<m;i++) // chạy vòng lặp theo số lượng học sinh, từ 0 tới m.
+    fptr=fopen("student.dat","ab+"); //////
+    for(i=0;i<m;i++) //
     {
         CT:
         {
-        printf("\nID of student %d : ",i+1); // Nhập ID hs thứ i+1
+        printf("\nID of student %d : ",i+1); //
         scanf("%d",&sv.mssv);
-        while(fread(&check,sizeof(struct Manage),1,fptr)) // vòng lặp kiểm tra xem ID đã có hay chưa, gán thông tin trong file vào biến check.
+        while(fread(&check,sizeof(struct Manage),1,fptr)) //
             {
-            if(sv.mssv==check.mssv)  // sv.mssv là ID nhập từ phím, check.mssv là ID đọc trong file.
+            if(sv.mssv==check.mssv)  //
                 {
-                    dem++; // tạo biến đếm, mỗi lần trùng sẽ tăng thêm 1
+                    dem++; //
                 }
             }
         }
-        if(dem==0) // nếu biến đếm = 0 tức là không trùng thì chạy bọn dưới.
+        if(dem==0)
         {
                 fflush(stdin);
                 printf("Name of student:");
@@ -54,16 +54,16 @@ void addID() /////////// Hàm thêm ID học sinh///////////////////////////////
                 printf("Biology score: ");
                 scanf("%d",&sv.bio);
                 fwrite(&sv,sizeof(struct Manage),1,fptr);
-                dem=0; // gán biến đếm về 0 sau mỗi vòng kiểm tra.
-                rewind(fptr); // trả con trỏ về đầu file
+                dem=0;
+                rewind(fptr);
         }
-        else // nếu đếm = 1, tức là bị trùng thì chạy bọn dưới.
+        else
         {
-            system("cls"); // lệnh xóa màn hình cho đẹp.
-            dem=0; // gán biến đếm về 0 sau mỗi vòng kiểm tra.
-            rewind(fptr); // trả con trỏ về đầu file
+            system("cls");
+            dem=0;
+            rewind(fptr);
             printf("This ID already exists.\n");
-            printf("Press 1 to skip, 2 to import again, 3 to return the menu: "); // tạo menu lựa chọn. 1 là bỏ qua thằng trước, nhập thằng kế tiếp, 2 là nhập lại từ đầu, 3 là trở về menu
+            printf("Press 1 to skip, 2 to import again, 3 to return the menu: ");
             scanf("%d",&c);
             if(c==2)
             {
@@ -79,7 +79,7 @@ void addID() /////////// Hàm thêm ID học sinh///////////////////////////////
     fclose(fptr);
     printf("\n");
 }
-void showData() // Hàm show cơ sở dữ liệu //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void showData() //  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     int n;
     struct Manage infor;
@@ -126,7 +126,7 @@ void showData() // Hàm show cơ sở dữ liệu //////////////////////////////
 }
 
 
-void searchID1()// Hàm search ID học sinh//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void searchID1()////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     struct Manage sv;
     int n,dem=0;
@@ -163,7 +163,7 @@ void searchID1()// Hàm search ID học sinh////////////////////////////////////
     }
 }
 
-void searchID2()// Hàm search ID học sinh//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void searchID2()////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     struct Manage sv;
     int n,dem=0;
@@ -200,7 +200,7 @@ void searchID2()// Hàm search ID học sinh////////////////////////////////////
     }
 }
 
-void exportTextFile()////Hàm export CSDL ra file text//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void exportTextFile()////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     struct Manage mag;
     FILE *f1=fopen("student.dat","rb" );
@@ -221,7 +221,7 @@ void exportTextFile()////Hàm export CSDL ra file text//////////////////////////
     return 0;
 }
 
-void modify()// Hàm chỉnh sửa thông tin HS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void modify()// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     struct Manage dlt={0,"",0,0,0,0,0};
     struct Manage sv;
